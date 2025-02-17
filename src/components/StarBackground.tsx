@@ -3,6 +3,7 @@
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import styles from "../css/StarBackground.module.css";
 
 interface StarLayer extends THREE.Points {
   opacities: number[];
@@ -14,7 +15,7 @@ const StarBackground: React.FC = () => {
   useEffect(() => {
     if (!mountRef.current) return;
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 2;
     const renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -134,7 +135,7 @@ const StarBackground: React.FC = () => {
       starTexture?.dispose();
     };
   }, []);
-  return <div ref={mountRef} className="fixed inset-0 overflow-hidden pointer-events-none" />;
+  return <div ref={mountRef} className={styles.custom_class} />;
 };
 
 export default StarBackground;
