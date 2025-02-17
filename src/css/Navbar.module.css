@@ -1,11 +1,4 @@
-/* Navbar.module.css */
-:root {
-  --primary-color: #ffffff;
-  /* White text */
-  --hover-color: #ffcc00;
-  /* Highlight color */
-}
-
+/* src/css/Navbar.module.css */
 .navbar {
   display: flex;
   justify-content: space-between;
