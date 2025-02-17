@@ -10,18 +10,18 @@ function Footer() {
         <div className={styles["footer-content"]}>
           {/* Company Section */}
           <div className={styles["footer-section"]}>
-            <h3>Your Company</h3>
+            <h3>บริษัทของคุณ</h3>
             <p>สร้างนวัตกรรมเพื่ออนาคตที่ดีกว่า</p>
-            <p>&copy; {new Date().getFullYear()} Your Company. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} บริษัทของคุณ สงวนลิขสิทธิ์</p>
           </div>
 
           {/* Quick Links Section */}
           <div className={styles["footer-section"]}>
             <h3>เมนูลัด</h3>
             <ul className={styles["quick_links"]}>
-              <li><a href="/about">เกี่ยวกับเรา</a></li>
-              <li><a href="/services">บริการ</a></li>
-              <li><a href="/contact">ติดต่อเรา</a></li>
+              <li className={styles["active_section"]}><a href="/about">เกี่ยวกับเรา</a></li>
+              <li className={styles["active_section"]}><a href="/services">บริการ</a></li>
+              <li className={styles["active_section"]}><a href="/contact">ติดต่อเรา</a></li>
             </ul>
           </div>
 

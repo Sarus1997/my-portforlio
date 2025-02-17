@@ -65,8 +65,8 @@
   padding: 0;
 }
 
-.quick-links li {
-  margin-bottom: 18px;
+.active_section {
+  list-style-type: none;
 }
 
 .quick-links a {
@@ -165,8 +165,10 @@
   }
 
   .bottom-bar {
-    flex-direction: column;
-    gap: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 5px;
     text-align: center;
   }
 
