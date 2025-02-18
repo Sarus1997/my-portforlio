@@ -1,12 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import '../scss/navbar.scss';
+import "../scss/navbar.scss";
 
 const Navbar: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,35 +23,62 @@ const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+    // Prevent body scrolling when sidebar is open
+    document.body.style.overflow = !isSidebarOpen ? 'hidden' : 'auto';
   };
 
   return (
-    <nav className={`navbar ${!isVisible ? 'navbar--hidden' : ''}`}>
-      <div className="navbar__container">
-        <div className="navbar__logo">
-          TEST 123
+    <>
+      <nav className={`navbar ${!isVisible ? 'navbar--hidden' : ''}`}>
+        <div className="navbar__container">
+          <div className="navbar__logo">
+            TEST 123
+          </div>
+
+          <button
+            className={`navbar__toggle ${isSidebarOpen ? 'active' : ''}`}
+            onClick={toggleSidebar}
+            aria-label="Toggle menu"
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
         </div>
+      </nav>
 
-        <button
-          className={`navbar__mobile-toggle ${isMenuOpen ? 'active' : ''}`}
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
+      {/* Overlay */}
+      <div
+        className={`sidebar-overlay ${isSidebarOpen ? 'active' : ''}`}
+        onClick={toggleSidebar}
+      />
 
-        <ul className={`navbar__links ${isMenuOpen ? 'navbar__links--open' : ''}`}>
-          <li><a href="#home" onClick={() => setIsMenuOpen(false)}>Home</a></li>
-          <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About</a></li>
-          <li><a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a></li>
-          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
-        </ul>
-      </div>
-    </nav>
+      {/* Sidebar */}
+      <aside className={`sidebar ${isSidebarOpen ? 'active' : ''}`}>
+        <div className="sidebar__content">
+          <div className="sidebar__header">
+            <div className="navbar__logo">TEST 123</div>
+            <button
+              className={`navbar__toggle active`}
+              onClick={toggleSidebar}
+              aria-label="Close menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+          <ul className="sidebar__links">
+            <li><a href="#home" onClick={toggleSidebar}>Home</a></li>
+            <li><a href="#about" onClick={toggleSidebar}>About</a></li>
+            <li><a href="#services" onClick={toggleSidebar}>Services</a></li>
+            <li><a href="#contact" onClick={toggleSidebar}>Contact</a></li>
+          </ul>
+        </div>
+      </aside>
+    </>
   );
 };
 
