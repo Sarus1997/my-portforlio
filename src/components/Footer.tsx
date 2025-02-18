@@ -1,7 +1,7 @@
 import React from 'react';
 import '../scss/footer.scss';
 
-import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { Facebook, X, Instagram, Linkedin } from 'lucide-react';
 
 function Footer() {
   return (
@@ -39,24 +39,22 @@ function Footer() {
 
         {/* Bottom Bar */}
         <div className="bottom-bar">
-          {[
-            { Icon: Facebook, label: 'Facebook' },
-            { Icon: Twitter, label: 'Twitter' },
-            { Icon: Instagram, label: 'Instagram' },
-            { Icon: Linkedin, label: 'LinkedIn' }
-          ].map(({ Icon, label }) => (
-            <a
-              key={label}
-              href="#"
-              className="text-gray-400 hover:text-white transition-colors duration-300"
-              aria-label={label}
-            >
-              <Icon size={24} />
-            </a>
-          ))}
+          <a href="#" className="facebook" aria-label="Facebook">
+            <Facebook size={24} />
+          </a>
+          <a href="https://x.com" className="x-icon" aria-label="X" target="_blank" rel="noopener noreferrer">
+            <X size={24} />
+          </a>
+
+          <a href="#" className="instagram" aria-label="Instagram">
+            <Instagram size={24} />
+          </a>
+          <a href="#" className="linkedin" aria-label="LinkedIn">
+            <Linkedin size={24} />
+          </a>
         </div>
       </div>
-    </footer >
+    </footer>
   );
 }
 

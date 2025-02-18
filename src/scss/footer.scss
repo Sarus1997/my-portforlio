@@ -114,7 +114,45 @@
   justify-content: flex-end;
   align-items: center;
   gap: 50px;
+
+  a {
+    transition: color 0.3s ease;
+  }
+
+  .facebook {
+    color: #4267b28c;
+
+    &:hover {
+      color: #3b5998;
+    }
+  }
+
+  .linkedin {
+    color: #0a66c282;
+
+    &:hover {
+      color: #8ecdef;
+    }
+  }
+
+  .x-icon {
+    color: #545454c9;
+
+    &:hover {
+      color: #406983;
+    }
+  }
+
+
+  .instagram {
+    color: #e1306b82;
+
+    &:hover {
+      color: #d6287a;
+    }
+  }
 }
+
 
 .legal-links {
   a {
