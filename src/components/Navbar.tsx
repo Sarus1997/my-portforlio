@@ -7,7 +7,6 @@ const Navbar: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -18,14 +17,12 @@ const Navbar: React.FC = () => {
       }
       setLastScrollY(currentScrollY);
     };
-
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
-    // Prevent body scrolling when sidebar is open
     document.body.style.overflow = !isSidebarOpen ? 'hidden' : 'auto';
   };
 
@@ -36,7 +33,6 @@ const Navbar: React.FC = () => {
           <div className="navbar__logo">
             TEST 123
           </div>
-
           <button
             className={`navbar__toggle ${isSidebarOpen ? 'active' : ''}`}
             onClick={toggleSidebar}
