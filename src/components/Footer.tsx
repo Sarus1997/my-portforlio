@@ -19,9 +19,9 @@ function Footer() {
           <div className="footer-section">
             <h3>เมนูลัด</h3>
             <ul className="quick_links">
-              <li className="active_section"><a href="/about">เกี่ยวกับเรา</a></li>
-              <li className="active_section"><a href="/services">บริการ</a></li>
-              <li className="active_section"><a href="/contact">ติดต่อเรา</a></li>
+              <li className="active_section"><a href="/about">&nbsp; เกี่ยวกับเรา</a></li>
+              <li className="active_section"><a href="/services">&nbsp; บริการ</a></li>
+              <li className="active_section"><a href="/contact">&nbsp; ติดต่อเรา</a></li>
             </ul>
           </div>
 
