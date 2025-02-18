@@ -1,37 +1,54 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import styles from "../css/Navber.module.css";
+import React, { useState, useEffect } from 'react';
+import '../scss/navbar.scss';
 
 const Navbar: React.FC = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
-        setIsVisible(false); // ซ่อน navbar เมื่อเลื่อนลง
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false);
       } else {
-        setIsVisible(true); // แสดง navbar เมื่อเลื่อนขึ้น
+        setIsVisible(true);
       }
-      setLastScrollY(window.scrollY);
+      setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [lastScrollY]);
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
-    <nav className={`${styles.navbar} ${isVisible ? styles.show : styles.hide}`}>
-      <div className={styles.container}>
-        <div className={styles.logo}>TEST 123</div>
-        <ul className={styles["nav-links"]}>
-          <li><a href="#home" className="nav-item">Home</a></li>
-          <li><a href="#about" className="nav-item">About</a></li>
-          <li><a href="#services" className="nav-item">Services</a></li>
-          <li><a href="#contact" className="nav-item">Contact</a></li>
+    <nav className={`navbar ${!isVisible ? 'navbar--hidden' : ''}`}>
+      <div className="navbar__container">
+        <div className="navbar__logo">
+          TEST 123
+        </div>
+
+        <button
+          className={`navbar__mobile-toggle ${isMenuOpen ? 'active' : ''}`}
+          onClick={toggleMenu}
+          aria-label="Toggle menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <ul className={`navbar__links ${isMenuOpen ? 'navbar__links--open' : ''}`}>
+          <li><a href="#home" onClick={() => setIsMenuOpen(false)}>Home</a></li>
+          <li><a href="#about" onClick={() => setIsMenuOpen(false)}>About</a></li>
+          <li><a href="#services" onClick={() => setIsMenuOpen(false)}>Services</a></li>
+          <li><a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a></li>
         </ul>
       </div>
     </nav>

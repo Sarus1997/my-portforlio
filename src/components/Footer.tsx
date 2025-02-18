@@ -1,34 +1,34 @@
 import React from 'react';
-import styles from '../css/Footer.module.css';
+import '../scss/footer.scss';
 
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 function Footer() {
   return (
-    <footer className={styles["footer"]}>
-      <div className={styles["container"]}>
-        <div className={styles["footer-content"]}>
+    <footer className="footer">
+      <div className="container">
+        <div className="footer-content">
           {/* Company Section */}
-          <div className={styles["footer-section"]}>
+          <div className="footer-section">
             <h3>บริษัทของคุณ</h3>
             <p>สร้างนวัตกรรมเพื่ออนาคตที่ดีกว่า</p>
             <p>&copy; {new Date().getFullYear()} บริษัทของคุณ สงวนลิขสิทธิ์</p>
           </div>
 
           {/* Quick Links Section */}
-          <div className={styles["footer-section"]}>
+          <div className="footer-section">
             <h3>เมนูลัด</h3>
-            <ul className={styles["quick_links"]}>
-              <li className={styles["active_section"]}><a href="/about">เกี่ยวกับเรา</a></li>
-              <li className={styles["active_section"]}><a href="/services">บริการ</a></li>
-              <li className={styles["active_section"]}><a href="/contact">ติดต่อเรา</a></li>
+            <ul className="quick_links">
+              <li className="active_section"><a href="/about">เกี่ยวกับเรา</a></li>
+              <li className="active_section"><a href="/services">บริการ</a></li>
+              <li className="active_section"><a href="/contact">ติดต่อเรา</a></li>
             </ul>
           </div>
 
           {/* Contact Section */}
-          <div className={styles["footer-section"]}>
+          <div className="footer-section">
             <h3>ติดต่อเรา</h3>
-            <div className={styles["contact-info"]}>
+            <div className="contact-info">
               <p>123 ถนนสุขุมวิท</p>
               <p>กรุงเทพมหานคร 10110</p>
               <p>โทร: 02-123-4567</p>
@@ -38,7 +38,7 @@ function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className={styles["bottom-bar"]}>
+        <div className="bottom-bar">
           {[
             { Icon: Facebook, label: 'Facebook' },
             { Icon: Twitter, label: 'Twitter' },

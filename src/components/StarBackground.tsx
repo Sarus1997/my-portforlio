@@ -3,7 +3,7 @@
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import styles from "../css/StarBackground.module.css";
+import "../scss/star_background.scss";
 
 interface StarLayer extends THREE.Points {
   opacities: number[];
@@ -12,12 +12,18 @@ interface StarLayer extends THREE.Points {
 
 const StarBackground: React.FC = () => {
   const mountRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (!mountRef.current) return;
+
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(10, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 2;
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
+
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      powerPreference: 'high-performance'
+    });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setClearColor(0x000000);
@@ -48,6 +54,7 @@ const StarBackground: React.FC = () => {
       const vertices: number[] = [];
       const opacities: number[] = [];
       const twinkleSpeed: number[] = [];
+
       for (let i = 0; i < count; i++) {
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.random() * Math.PI;
@@ -93,17 +100,21 @@ const StarBackground: React.FC = () => {
     const animate = () => {
       requestAnimationFrame(animate);
       time += 0.0005;
+
       starLayers.forEach((layer, layerIndex) => {
         layer.rotation.x = Math.sin(time * (layerIndex + 1) * 0.5) * 0.2;
         layer.rotation.y = Math.cos(time * (layerIndex + 1) * 0.3) * 0.2;
         layer.rotation.z = Math.sin(time * (layerIndex + 1) * 0.4) * 0.1;
+
         if (!layer.geometry.attributes.color) {
           const colors = new Float32Array(layer.geometry.attributes.position.array.length);
           layer.geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
           (layer.material as THREE.PointsMaterial).vertexColors = true;
         }
+
         const colors = layer.geometry.attributes.color.array as Float32Array;
         const baseColor = new THREE.Color((layer.material as THREE.PointsMaterial).color);
+
         for (let i = 0; i < layer.opacities.length; i++) {
           layer.opacities[i] += layer.twinkleSpeed[i];
           const opacity = Math.sin(layer.opacities[i]) * 0.3 + 0.5;
@@ -112,8 +123,10 @@ const StarBackground: React.FC = () => {
           colors[colorIndex + 1] = baseColor.g * opacity;
           colors[colorIndex + 2] = baseColor.b * opacity;
         }
+
         layer.geometry.attributes.color.needsUpdate = true;
       });
+
       renderer.render(scene, camera);
     };
 
@@ -125,18 +138,23 @@ const StarBackground: React.FC = () => {
       renderer.setSize(window.innerWidth, window.innerHeight);
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     };
+
     window.addEventListener('resize', handleResize);
+
     return () => {
       mountRef.current?.removeChild(renderer.domElement);
       window.removeEventListener('resize', handleResize);
+
       starLayers.forEach(layer => {
         layer.geometry.dispose();
         (layer.material as THREE.PointsMaterial).dispose();
       });
+
       starTexture?.dispose();
     };
   }, []);
-  return <div ref={mountRef} className={styles.custom_class} />;
+
+  return <div ref={mountRef} className="custom_class" />;
 };
 
 export default StarBackground;
